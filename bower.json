@@ -1,0 +1,36 @@
+{
+  "name": "mediaelement-skin",
+  "version": "0.1.0",
+  "title": "Media Element Skin",
+  "description": "A theme builder for MediaElement.js",
+  "keywords": [
+    "mediaelement",
+    "skin",
+    "theme",
+    "sass",
+    "js",
+    "javascript"
+  ],
+  "homepage": "https://github.com/mattdrose/mediaelement-skin",
+  "author": {
+    "name": "Matt Rose",
+    "url": "http://mattrose.ca"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mattdrose/mediaelement-skin.git"
+  },
+  "bugs": "https://github.com/mattdrose/mediaelement-skin/issues",
+  "license": "MIT",
+  "main": [
+  ],
+  "ignore": [
+    "Gruntfile.js",
+    "package.json",
+    "*.md"
+  ],
+  "devDependencies": {
+    "jquery": ">=1.6",
+    "mediaelement": "2.16.3"
+  }
+}

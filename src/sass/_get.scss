@@ -1,0 +1,17 @@
+@function get($key, $map) {
+
+  $break: false;
+  @while (str-index($key, ".") or 0) > 0 and $break == false {
+
+    $child-key: str-slice($key, 1, str-index($key, ".") - 1);
+    $key: str-slice($key, str-index($key, ".") + 1);
+
+    @if type-of(map-get($map, $child-key)) == map {
+      $map: map-get($map, $child-key);
+    } @else {
+      $break: true;
+    }
+  }
+
+  @return if(type-of($map) == map, map-get($map, $key), $map);
+}

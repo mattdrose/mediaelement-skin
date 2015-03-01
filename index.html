@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MediaElement Skin</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="src/css/skin.css">
+  </head>
+  <body>
+
+    <div class="mejs-wrapper mejs-green">
+      <video src="src/media/gospel.mp4" controls="controls"></video>
+    </div>
+
+    <br><br>
+
+    <div class="mejs-audio-wrapper mejs-green">
+      <audio src="src/media/gospel.mp3" width="100%" controls="controls"></audio>
+    </div>
+
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/mediaelement/build/mediaelement-and-player.js"></script>
+
+    <script>
+      $(document).ready(function (){
+        $('video,audio').mediaelementplayer();
+      });
+    </script>
+  </body>
+</html>
