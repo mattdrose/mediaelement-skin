@@ -1,0 +1,20 @@
+/**
+ ********************************
+ * _ICONS.SCSS
+ ********************************
+ */
+
+@import "icons/mejs-icons";
+
+%mejs-icon {
+  font-family: "mejs-icons";
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

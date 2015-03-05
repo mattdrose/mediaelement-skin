@@ -1,0 +1,44 @@
+/**
+ ********************************
+ * _MAPS.SCSS
+ ********************************
+ */
+
+/**
+ * Map helpers for retrieving and overwriting settings
+ */
+
+/**
+ * @function mejs-get
+ * @description Gets the key from a map. By default it retrieves from
+ * $mejs-settings. You can access maps recursively using dot notation like in
+ * Javascript objects (leve1.level2).
+ *
+ * @param {string} [$key] The key of the desired value
+ * @param {map} [$map=$mejs-settings] The map to search
+ *
+ * @return {undefined} Returns the assoicated variable
+ *
+ * @example
+    .foo{
+      color: mejs-get(brand-color);
+      background-color: mejs-get(first.second.color, $some-map);
+    }
+ */
+@function mejs-get($key, $map: $mejs-settings) {
+
+  $break: false;
+  @while (str-index($key, ".") or 0) > 0 and $break == false {
+
+    $child-key: str-slice($key, 1, str-index($key, ".") - 1);
+    $key: str-slice($key, str-index($key, ".") + 1);
+
+    @if type-of(map-get($map, $child-key)) == map {
+      $map: map-get($map, $child-key);
+    } @else {
+      $break: true;
+    }
+  }
+
+  @return if(type-of($map) == map, map-get($map, $key), $map);
+}

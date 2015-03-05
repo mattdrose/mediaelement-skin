@@ -1,17 +1,12 @@
-@import "compass";
+/**
+ ********************************
+ * _CORE.SCSS
+ ********************************
+ */
 
-@import "get";
-
-$me: (
-  img-src: '../img/',
-  background: #333,
-  total-color: #444,
-  current-color: #AAA,
-  loaded-color: #666,
-  volume-total-color: #444,
-  volume-current-color: #85C028,
-  border-radius: 0,
-);
+/**
+ * This is based on MediaElements' mediaelementplayer.css
+ */
 
 .mejs-offscreen{
 /* Accessibility: hide screen reader texts (and prefer "top" for RTL languages). */
@@ -30,6 +25,10 @@ $me: (
   text-align: left;
   vertical-align: top;
   text-indent: 0;
+
+  &:focus {
+    outline: 0;
+  }
 }
 
 .me-plugin {
@@ -119,15 +118,21 @@ $me: (
   width: 100px;
   height: 100px;
   margin: -50px 0 0 -50px;
-  background: url(#{get(img-src, $me)}bigplay.svg) no-repeat;
+
+  &:before {
+    @extend %mejs-icon;
+    @include mejs-icon-play2;
+    color: rgba(#FFF, 0.5);
+    display: inline-block;
+    font-size: 100px;
+    line-height: 100px;
+    width: 100%;
+    text-align: center;
+  }
 }
 
-.no-svg .mejs-overlay-button {
-  background-image: url(#{get(img-src, $me)}bigplay.png);
-}
-
-.mejs-overlay:hover .mejs-overlay-button {
-  background-position: 0 -100px ;
+.mejs-overlay:hover .mejs-overlay-button:before {
+  color: rgba(#FFF, 0.75);
 }
 
 .mejs-overlay-loading {
@@ -137,16 +142,33 @@ $me: (
   width: 80px;
   height: 80px;
   margin: -40px 0 0 -40px;
-  background: get(background, $me);
-  @include border-radius(50%);
 }
 
-.mejs-overlay-loading span {
-  display: block;
+.mejs-overlay-loading span:before {
+  @extend %mejs-icon;
+  @include mejs-icon-spinner4;
+  color: rgba(#FFF, 0.5);
+  display: inline-block;
+  font-size: 80px;
+  line-height: 80px;
   width: 80px;
-  height: 80px;
-  background: transparent url(#{get(img-src, $me)}loading.gif) 50% 50% no-repeat;
+  @include animation(mejs-spin 1s linear infinite);
 }
+  @-webkit-keyframes mejs-spin {
+    100% { -webkit-transform: rotate(359deg); }
+  }
+
+  @-moz-keyframes mejs-spin {
+    100% { -moz-transform: rotate(359deg); }
+  }
+
+  @-o-keyframes mejs-spin {
+    100% { -moz-transform: rotate(359deg); }
+  }
+
+  @keyframes mejs-spin {
+    100% {  transform: rotate(359deg); }
+  }
 
 /* End: LAYERS */
 
@@ -158,7 +180,7 @@ $me: (
   padding: 0;
   bottom: 0;
   left: 0;
-  background: get(background, $me);
+  background: mejs-get(background);
   height: 30px;
   width: 100%;
 }
@@ -189,11 +211,17 @@ $me: (
   height: 16px;
   width: 16px;
   border: 0;
-  background: transparent url(#{get(img-src, $me)}controls.svg) no-repeat;
-}
+  background: transparent;
 
-.no-svg .mejs-controls .mejs-button button {
-  background-image: url(#{get(img-src, $me)}controls.png);
+  &:before {
+    @extend %mejs-icon;
+    color: rgba(#FFF, 0.75);
+    display: inline-block;
+    font-size: 16px;
+    line-height: 16px;
+    width: 100%;
+    text-align: center;
+  }
 }
 
 /* :focus for accessibility */
@@ -229,16 +257,16 @@ $me: (
 /* End: Time (Current / Duration) */
 
 /* Start: Play/Pause/Stop */
-.mejs-controls .mejs-play button {
-  background-position: 0 0;
+.mejs-controls .mejs-play button:before {
+  @include mejs-icon-play3;
 }
 
-.mejs-controls .mejs-pause button {
-  background-position: 0 -16px;
+.mejs-controls .mejs-pause button:before {
+  @include mejs-icon-pause2;
 }
 
-.mejs-controls .mejs-stop button {
-  background-position: -112px 0;
+.mejs-controls .mejs-stop button:before {
+  @include mejs-icon-stop2;
 }
 /* Start: Play/Pause/Stop */
 
@@ -254,15 +282,15 @@ $me: (
   position: absolute;
   width: 180px;
   height: 5px;
-  @if (get(border-radius, $me)) {
-    @include border-radius(get(border-radius, $me));
+  @if (mejs-get(border-radius)) {
+    @include border-radius(mejs-get(border-radius));
   }
   cursor: pointer;
 }
 
 .mejs-controls .mejs-time-rail .mejs-time-total {
   margin: 5px;
-  background: get(total-color, $me);
+  background: mejs-get(total-color);
 }
 
 .mejs-controls .mejs-time-rail .mejs-time-buffering {
@@ -283,12 +311,12 @@ $me: (
 };
 
 .mejs-controls .mejs-time-rail .mejs-time-loaded {
-  background: get(loaded-color, $me);
+  background: mejs-get(loaded-color);
   width: 0;
 }
 
 .mejs-controls .mejs-time-rail .mejs-time-current {
-  background: get(current-color, $me);
+  background: mejs-get(current-color);
   width: 0;
 }
 
@@ -298,8 +326,8 @@ $me: (
   margin: 0;
   width: 10px;
   background: #fff;
-  @if (get(border-radius, $me)) {
-    @include border-radius(get(border-radius, $me) * 2);
+  @if (mejs-get(border-radius)) {
+    @include border-radius(mejs-get(border-radius) * 2);
   }
   cursor: pointer;
   border: solid 2px #333;
@@ -361,12 +389,12 @@ $me: (
 /* End: Progress Bar */
 
 /* Start: Fullscreen */
-.mejs-controls .mejs-fullscreen-button button {
-  background-position: -32px 0;
+.mejs-controls .mejs-fullscreen-button button:before {
+  @include mejs-icon-expand;
 }
 
-.mejs-controls .mejs-unfullscreen button {
-  background-position: -32px -16px;
+.mejs-controls .mejs-unfullscreen button:before {
+  @include mejs-icon-contract;
 }
 /* End: Fullscreen */
 
@@ -375,12 +403,12 @@ $me: (
 .mejs-controls .mejs-volume-button {
 }
 
-.mejs-controls .mejs-mute button {
-  background-position: -16px -16px;
+.mejs-controls .mejs-mute button:before {
+  @include mejs-icon-volume-medium;
 }
 
-.mejs-controls .mejs-unmute button {
-  background-position: -16px 0;
+.mejs-controls .mejs-unmute button:before {
+  @include mejs-icon-volume-mute;
 }
 
 .mejs-controls .mejs-volume-button {
@@ -391,7 +419,7 @@ $me: (
   display: none;
   height: 115px;
   width: 25px;
-  background: rgba(get(background, $me), 0.5);
+  background: rgba(mejs-get(background), 0.5);
   @include border-radius(0);
   top: -115px;
   left: 0;
@@ -401,8 +429,8 @@ $me: (
 }
 
 .mejs-controls .mejs-volume-button:hover {
-  @if (get(border-radius, $me)) {
-    @include border-radius(0 0 (get(border-radius, $me) * 2) (get(border-radius, $me) * 2));
+  @if (mejs-get(border-radius)) {
+    @include border-radius(0 0 (mejs-get(border-radius) * 2) (mejs-get(border-radius) * 2));
   }
 }
 
@@ -418,7 +446,7 @@ $me: (
   top: 8px;
   width: 2px;
   height: 100px;
-  background: get(volume-total-color, $me);
+  background: mejs-get(volume-total-color);
   margin: 0;
 }
 
@@ -428,7 +456,7 @@ $me: (
   top: 8px;
   width: 2px;
   height: 100px;
-  background: get(volume-current-color, $me);
+  background: mejs-get(volume-current-color);
   margin: 0;
 }
 
@@ -438,10 +466,10 @@ $me: (
   top: -3px;
   width: 16px;
   height: 6px;
-  background: get(volume-current-color, $me);
+  background: mejs-get(volume-current-color);
   cursor: N-resize;
-  @if (get(border-radius, $me)) {
-    @include border-radius(get(border-radius, $me) / 2);
+  @if (mejs-get(border-radius)) {
+    @include border-radius(mejs-get(border-radius) / 2);
   }
   margin: 0;
 }
@@ -465,10 +493,10 @@ $me: (
   margin: 0;
   padding: 0;
   font-size: 1px;
-  @if (get(border-radius, $me)) {
-    @include border-radius(get(border-radius, $me));
+  @if (mejs-get(border-radius)) {
+    @include border-radius(mejs-get(border-radius));
   }
-  background: get(volume-total-color, $me);
+  background: mejs-get(volume-total-color);
 }
 
 .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current {
@@ -480,10 +508,10 @@ $me: (
   margin: 0;
   padding: 0;
   font-size: 1px;
-  @if (get(border-radius, $me)) {
-    @include border-radius(get(border-radius, $me));
+  @if (mejs-get(border-radius)) {
+    @include border-radius(mejs-get(border-radius));
   }
-  background: get(volume-current-color, $me);
+  background: mejs-get(volume-current-color);
 }
 
 .mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-handle {
@@ -497,8 +525,8 @@ $me: (
   position: relative;
 }
 
-.mejs-controls .mejs-captions-button button {
-  background-position: -48px 0;
+.mejs-controls .mejs-captions-button button:before {
+  @include mejs-icon-cc;
 }
 .mejs-controls .mejs-captions-button .mejs-captions-selector {
   visibility: hidden;
@@ -569,7 +597,7 @@ $me: (
 .mejs-chapters .mejs-chapter {
   position: absolute;
   float: left;
-  background: get(background, $me);
+  background: mejs-get(background);
   overflow: hidden;
   border: 0;
 }
@@ -652,7 +680,6 @@ $me: (
 
 .mejs-captions-text {
   padding: 3px 5px;
-  background: url(#{get(img-src, $me)}background.png);
   background: rgba(20, 20, 20, 0.5);
   white-space: pre-wrap;
 }
@@ -675,29 +702,31 @@ $me: (
 
 
 /* Start: Loop */
-.mejs-controls .mejs-loop-off button {
-  background-position: -64px -16px;
+.mejs-controls .mejs-loop-off button:before {
+  @include mejs-icon-redo;
 }
 
 .mejs-controls .mejs-loop-on button {
-  background-position: -64px 0;
+  @include mejs-icon-redo;
+  opacity: 0.5;
 }
 
 /* End: Loop */
 
 /* Start: backlight */
 .mejs-controls .mejs-backlight-off button {
-  background-position: -80px -16px;
+  @include mejs-icon-cc;
 }
 
 .mejs-controls .mejs-backlight-on button {
-  background-position: -80px 0;
+  @include mejs-icon-cc;
+  opacity: 0.5;
 }
 /* End: backlight */
 
 /* Start: Picture Controls */
 .mejs-controls .mejs-picturecontrols-button {
-  background-position: -96px 0;
+  @include mejs-icon-settings;
 }
 /* End: Picture Controls */
 
@@ -707,8 +736,8 @@ $me: (
   position: absolute;
   width: 150px;
   padding: 10px;
-  @if (get(border-radius, $me)) {
-    @include border-radius(get(border-radius, $me) * 2);
+  @if (mejs-get(border-radius)) {
+    @include border-radius(mejs-get(border-radius) * 2);
   }
   top: 0;
   left: 0;
@@ -740,8 +769,8 @@ $me: (
   position: relative;
 }
 
-.mejs-controls .mejs-sourcechooser-button button {
-  background-position: -128px 0;
+.mejs-controls .mejs-sourcechooser-button button:before {
+  @include mejs-icon-certificate;
 }
 
 .mejs-controls .mejs-sourcechooser-button .mejs-sourcechooser-selector {
@@ -751,7 +780,6 @@ $me: (
   right: -10px;
   width: 130px;
   height: 100px;
-  background: url(#{get(img-src, $me)}background.png);
   background: rgba(50,50,50,0.7);
   border: solid 1px transparent;
   padding: 10px;
@@ -799,7 +827,6 @@ $me: (
   left: 0;
   width: 100%;
   height: 100%;
-  background: url(#{get(img-src, $me)}background.png);
   background: rgba(50,50,50,0.7);
   z-index: 1000;
   overflow: hidden;
@@ -812,7 +839,6 @@ $me: (
   position: absolute;
   right: 0;
   top: 0;
-  background: url(#{get(img-src, $me)}background.png);
   background: rgba(50,50,50,0.7);
   color: #fff;
   padding: 4px;
@@ -843,7 +869,6 @@ div.mejs-speed-button {
   left: -10px;
   width: 60px;
   height: 100px;
-  background: url(#{get(img-src, $me)}background.png);
   background: rgba(50, 50, 50, 0.7);
   border: solid 1px transparent;
   padding: 0;
@@ -904,7 +929,6 @@ div.mejs-speed-button {
 /* Start: Skip Back */
 
 .mejs-controls .mejs-button.mejs-skip-back-button {
-  background: transparent url(#{get(img-src, $me)}skipback.png) no-repeat;
   background-position: 3px 3px;
 }
 .mejs-controls .mejs-button.mejs-skip-back-button button {

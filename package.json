@@ -1,0 +1,17 @@
+{
+  "name": "MediaElement-Skin",
+  "version": "0.1.0",
+  "author": [
+    {
+      "name": "Matt Rose",
+      "email": "rose.matt@gmail.com"
+    }
+  ],
+  "engine": "node >= 0.10.26",
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "load-grunt-tasks": "~0.2.0",
+    "grunt-contrib-compass": "^0.7.2",
+    "grunt-webfont": "^0.4.7"
+  }
+}

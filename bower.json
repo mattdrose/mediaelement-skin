@@ -31,6 +31,7 @@
   ],
   "devDependencies": {
     "jquery": ">=1.6",
+    "gemini-icons": "0.1.x",
     "mediaelement": "2.16.3"
   }
 }

@@ -1,0 +1,16 @@
+/**
+ ********************************
+ * _MEDIAELEMENT-SKIN.SCSS
+ ********************************
+ */
+
+/**
+ * This is the main include file for using media mediaelement-skin. Simply
+ * include this file in your SASS, and overwrite any settings.
+ */
+@import "compass";
+
+@import "src/maps";
+@import "src/settings";
+@import "src/icons";
+@import "src/core";

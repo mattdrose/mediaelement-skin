@@ -1,0 +1,18 @@
+/**
+ ********************************
+ * _SETTINGS.SCSS
+ ********************************
+ */
+
+ $mejs-settings-defaults: (
+  background: #333,
+  total-color: #444,
+  current-color: #AAA,
+  loaded-color: #666,
+  volume-total-color: #444,
+  volume-current-color: #85C028,
+  border-radius: 0,
+);
+
+$mejs-settings: () !default;
+$mejs-settings: map-merge($mejs-settings-defaults, $mejs-settings);
