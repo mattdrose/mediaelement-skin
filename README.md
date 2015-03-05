@@ -36,6 +36,10 @@ $mejs-settings: (
 );
 ```
 
+## Requires
+
+- SASS/Compass
+
 ## Support
 
 - Modern Browsers, IE9+
