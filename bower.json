@@ -23,10 +23,12 @@
   "bugs": "https://github.com/mattdrose/mediaelement-skin/issues",
   "license": "MIT",
   "main": [
+    "mediaelement-skin.scss"
   ],
   "ignore": [
     "Gruntfile.js",
     "package.json",
+    "test",
     "*.md"
   ],
   "devDependencies": {
